@@ -20,7 +20,7 @@ roles = {
 @client.event
 async def on_ready():
 	await client.change_presence(activity=discord.Activity(
-		type=discord.ActivityType.watching, name='Sriracha | lc help'
+		type=discord.ActivityType.watching, name='you. run.'
 	))
 	print('Logged in as {0.user}'.format(client))
 
@@ -58,6 +58,7 @@ async def on_message(message: discord.Message):
 			reason='Custom pronoun role'
 		)
 		await home_server.get_member(user_id).add_roles([r])
+		return
 	elif channel.type == 'text':
 		if re.match(r'!here', message.content):
 			# creates a message for users to react to, adds it to role_messages, sets the message's guild as
@@ -79,6 +80,7 @@ async def on_message(message: discord.Message):
 			home_server = message.guild
 
 			await message.delete()
+			return
 
 
 client.run(TOKEN)
