@@ -3,7 +3,7 @@ import re
 
 import discord
 
-client = discord.Client
+client = discord.Client()
 TOKEN = cred['DISCORD_TOKEN']
 
 role_messages: list[discord.Message] = []
