@@ -2,6 +2,7 @@ from os import environ as cred
 import re
 
 import discord
+from discord import HTTPException
 
 intents = discord.Intents.default()
 intents.members = True
@@ -50,6 +51,42 @@ async def on_reaction_add(reaction, user: discord.Member):
 			if not user.dm_channel:
 				await user.create_dm()
 			await user.send('DM me with your custom pronouns, exactly as they will appear in the role')
+			return
+
+
+@client.event
+async def on_reaction_remove(reaction, user: discord.Member):
+	print(f'Reaction removal detected: {reaction.emoji}')
+	if user.id == client.user.id:
+		return
+	if reaction.message in role_messages:
+		if reaction.emoji == '1️⃣':
+			try:
+				await user.remove_roles(roles['he/him'])
+				print(f'Removed "He/Him" role from {user.name}')
+			except HTTPException:
+				pass
+			return
+		elif reaction.emoji == '2️⃣':
+			try:
+				await user.remove_roles(roles['she/her'])
+				print(f'Removed "She/Her" role to {user.name}')
+			except HTTPException:
+				pass
+			return
+		elif reaction.emoji == '3️⃣':
+			try:
+				await user.remove_roles(roles['they/them'])
+				print(f'Removed "They/Them" role to {user.name}')
+			except HTTPException:
+				pass
+			return
+		elif reaction.emoji == '4️⃣':
+			try:
+				await user.remove_roles(roles['any'])
+				print(f'Removed "Any" role to {user.name}')
+			except HTTPException:
+				pass
 			return
 
 
