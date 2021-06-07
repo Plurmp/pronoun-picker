@@ -61,7 +61,7 @@ async def on_message(message: discord.Message):
 		await home_server.get_member(user_id).add_roles([r])
 		return
 	elif channel.type == 'text':
-		if re.match(r'!here', message.content):
+		if re.match(r'^!here$', message.content.strip()):
 			# creates a message for users to react to, adds it to role_messages, sets the message's guild as
 			# home_server, and deletes the message that summons it
 			m: discord.Message = await channel.send(
