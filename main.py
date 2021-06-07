@@ -59,7 +59,12 @@ async def on_message(message: discord.Message):
 			name=message.content,
 			reason='Custom pronoun role'
 		)
-		await home_server.get_member(user_id).add_roles([r])
+		try:
+			await home_server.get_member(user_id).add_roles([r])
+		except AttributeError:
+			print(f'User name: {message.author.name}')
+			print(f'User id: {message.author.id}')
+			print(f'home server member list {home_server.members}')
 		return
 	else:
 		if re.match(r'^!here$', message.content.strip()):
