@@ -26,6 +26,8 @@ async def on_ready():
 
 @client.event
 async def on_reaction_add(reaction, user: discord.Member):
+	if user.id == client.user.id:
+		return
 	if reaction.message in role_messages:
 		if reaction.emoji == '1️⃣':
 			await user.add_roles(roles['he/him'])
