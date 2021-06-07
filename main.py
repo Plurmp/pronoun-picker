@@ -53,6 +53,7 @@ async def on_message(message: discord.Message):
 	print('message detected: ' + message.content)
 
 	if channel.type == 'private':
+		print('private message')
 		# creates a role from the DM, then assigns that role to the member
 		r: discord.Role = await home_server.create_role(
 			name=message.content,
