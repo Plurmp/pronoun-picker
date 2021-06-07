@@ -3,7 +3,9 @@ import re
 
 import discord
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.members = True
+client = discord.Client(intents=intents)
 TOKEN = cred['DISCORD_TOKEN']
 
 role_messages = []
@@ -49,6 +51,8 @@ async def on_message(message: discord.Message):
 	channel = message.channel
 	user_id: int = message.author.id
 
+	if message.author.id == client.user.id:
+		return
 	# await channel.send('I see your message!')
 	print('message detected: ' + message.content)
 
