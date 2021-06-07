@@ -51,7 +51,6 @@ async def on_reaction_add(reaction, user: discord.Member):
 async def on_message(message: discord.Message):
 	global home_server
 	channel = message.channel
-	user_id: int = message.author.id
 
 	if message.author.id == client.user.id:
 		return
@@ -66,7 +65,8 @@ async def on_message(message: discord.Message):
 			reason='Custom pronoun role'
 		)
 		try:
-			await home_server.get_member(user_id).add_roles([r])
+			member = home_server.get_member(message.author.id)
+			await member.add_roles(r)
 		except AttributeError:
 			print(f'User name: {message.author.name}')
 			print(f'User id: {message.author.id}')
