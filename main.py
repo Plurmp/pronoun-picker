@@ -6,7 +6,7 @@ import discord
 client = discord.Client()
 TOKEN = cred['DISCORD_TOKEN']
 
-role_messages: list[discord.Message] = []
+role_messages = []
 home_server: discord.Guild
 
 roles = {
