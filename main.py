@@ -40,6 +40,7 @@ async def on_reaction_add(reaction, user: discord.Member):
 
 @client.event
 async def on_message(message: discord.Message):
+	global home_server
 	channel = message.channel
 	user_id: int = message.author.id
 	if channel.type == 'private':
@@ -64,6 +65,7 @@ async def on_message(message: discord.Message):
 			await m.add_reaction('4️')
 			await m.add_reaction('❓')
 			role_messages.append(m)
+			home_server = message.guild
 
 
 client.run(TOKEN)
