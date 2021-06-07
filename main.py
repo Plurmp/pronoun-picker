@@ -80,6 +80,12 @@ async def on_message(message: discord.Message):
 			role_messages.append(m)
 			home_server = message.guild
 
+			# pre-existing pronoun roles in the server
+			roles['he/him'] = home_server.get_role(851312714269720596)
+			roles['she/her'] = home_server.get_role(851312774448676874)
+			roles['they/them'] = home_server.get_role(851312813368803358)
+			roles['any'] = home_server.get_role(851312852438351892)
+
 			await message.delete()
 			return
 
