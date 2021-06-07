@@ -25,16 +25,16 @@ async def on_ready():
 @client.event
 async def on_reaction_add(reaction, user: discord.Member):
 	if reaction.message in role_messages:
-		if reaction.emoji == '1️':
+		if reaction.emoji == '1️⃣':
 			await user.add_roles(roles['he/him'])
 			return
-		elif reaction.emoji == '2️':
+		elif reaction.emoji == '2️⃣':
 			await user.add_roles(roles['she/her'])
 			return
-		elif reaction.emoji == '3️':
+		elif reaction.emoji == '3️⃣':
 			await user.add_roles(roles['they/them'])
 			return
-		elif reaction.emoji == '4️':
+		elif reaction.emoji == '4️⃣':
 			await user.add_roles(roles['any'])
 			return
 		elif reaction.emoji == '❓':
@@ -66,16 +66,16 @@ async def on_message(message: discord.Message):
 			# home_server, and deletes the message that summons it
 			m: discord.Message = await channel.send(
 				'Please React to this message to pick your pronouns!\n'
-				'1️ is for **He/Him**\n'
-				'2️ is for **She/Her**\n'
-				'3️ is for **They/Them**\n'
-				'4️ is for **Any pronouns**\n'
+				':one: is for **He/Him**\n'
+				':two: is for **She/Her**\n'
+				':three: is for **They/Them**\n'
+				':four: is for **Any pronouns**\n'
 				'❓ is for **Custom pronouns**'
 			)
-			await m.add_reaction('1️')
-			await m.add_reaction('2️')
-			await m.add_reaction('3️')
-			await m.add_reaction('4️')
+			await m.add_reaction('1️⃣')
+			await m.add_reaction('2️⃣')
+			await m.add_reaction('3️⃣')
+			await m.add_reaction('4️⃣')
 			await m.add_reaction('❓')
 			role_messages.append(m)
 			home_server = message.guild
