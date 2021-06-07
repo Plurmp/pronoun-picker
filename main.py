@@ -18,6 +18,14 @@ roles = {
 
 
 @client.event
+async def on_ready():
+    await client.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.watching, name='Sriracha | lc help'
+    ))
+    print('Logged in as {0.user}'.format(client))
+
+
+@client.event
 async def on_reaction_add(reaction, user: discord.Member):
 	if reaction.message in role_messages:
 		if reaction.emoji == '1️':
@@ -44,6 +52,7 @@ async def on_message(message: discord.Message):
 	channel = message.channel
 	user_id: int = message.author.id
 	if channel.type == 'private':
+		# creates a role from the DM, then assigns that role to the member
 		r: discord.Role = await home_server.create_role(
 			name=message.content,
 			reason='Custom pronoun role'
@@ -51,6 +60,8 @@ async def on_message(message: discord.Message):
 		await home_server.get_member(user_id).add_roles([r])
 	elif channel.type == 'text':
 		if re.match(r'!here', message.content):
+			# creates a message for users to react to, adds it to role_messages, sets the message's guild as
+			# home_server, and deletes the message that summons it
 			m: discord.Message = await channel.send(
 				'Please React to this message to pick your pronouns!\n'
 				'1️ is for **He/Him**\n'
@@ -66,6 +77,8 @@ async def on_message(message: discord.Message):
 			await m.add_reaction('❓')
 			role_messages.append(m)
 			home_server = message.guild
+
+			await message.delete()
 
 
 client.run(TOKEN)
