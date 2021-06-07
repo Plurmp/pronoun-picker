@@ -26,25 +26,31 @@ async def on_ready():
 
 @client.event
 async def on_reaction_add(reaction, user: discord.Member):
+	print(f'Reaction detected: {reaction.emoji}')
 	if user.id == client.user.id:
 		return
 	if reaction.message in role_messages:
 		if reaction.emoji == '1️⃣':
 			await user.add_roles(roles['he/him'])
+			print(f'Assigned "He/Him" role to {user.name}')
 			return
 		elif reaction.emoji == '2️⃣':
 			await user.add_roles(roles['she/her'])
+			print(f'Assigned "She/Her" role to {user.name}')
 			return
 		elif reaction.emoji == '3️⃣':
 			await user.add_roles(roles['they/them'])
+			print(f'Assigned "They/Them" role to {user.name}')
 			return
 		elif reaction.emoji == '4️⃣':
 			await user.add_roles(roles['any'])
+			print(f'Assigned "Any" role to {user.name}')
 			return
 		elif reaction.emoji == '❓':
 			if not user.dm_channel:
 				await user.create_dm()
 			await user.send('DM me with your custom pronouns, exactly as they will appear in the role')
+			return
 
 
 @client.event
@@ -67,6 +73,7 @@ async def on_message(message: discord.Message):
 		try:
 			member = home_server.get_member(message.author.id)
 			await member.add_roles(r)
+			print(f'Assigned role "{r}" to {member.name}')
 		except AttributeError:
 			print(f'User name: {message.author.name}')
 			print(f'User id: {message.author.id}')
@@ -99,6 +106,7 @@ async def on_message(message: discord.Message):
 			roles['any'] = home_server.get_role(851312852438351892)
 
 			await message.delete()
+			print(f'Role message created in {message.channel.name}')
 			return
 
 
