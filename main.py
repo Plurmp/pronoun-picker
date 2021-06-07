@@ -49,7 +49,8 @@ async def on_message(message: discord.Message):
 	channel = message.channel
 	user_id: int = message.author.id
 
-	await channel.send('I see your message!')
+	# await channel.send('I see your message!')
+	print('message detected: ' + message.content)
 
 	if channel.type == 'private':
 		# creates a role from the DM, then assigns that role to the member
